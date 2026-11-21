@@ -2,5 +2,5 @@ import { AwsAccount } from "../types";
 
 export const AWS_ACCOUNT: AwsAccount = {
     accountId: "REDACTED",
-    region: "us-west-2"
+    region: "us-east-1"
 }
