@@ -10,3 +10,8 @@ cdk.out
 # Local
 .DS_Store
 hld.md
+
+# Account-specific values (see .env.example)
+.env
+# CDK lookup cache: its keys contain the AWS account ID. Regenerated on synth.
+cdk.context.json

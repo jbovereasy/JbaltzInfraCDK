@@ -2,6 +2,14 @@
 
 Infrastructure for jbaltz.com (AWS CDK, TypeScript). Design: [docs/hld.md](docs/hld.md).
 
+## Setup
+
+```sh
+cp .env.example .env   # then set AWS_ACCOUNT_ID to your 12-digit account ID
+npm ci
+npx cdk diff --all
+```
+
 ## CDK project notes
 
 This is a blank project for CDK development with TypeScript.
