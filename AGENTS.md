@@ -1,8 +1,17 @@
 # AGENTS.md
 
-This is an AWS CDK app written in TypeScript. The app entry point is the file in
-`bin/` that creates the `App`; the stack is defined in `lib/` (the `*-stack.ts`
-file). `cdk.json` tells the CDK Toolkit how to run the app.
+This is an AWS CDK app written in TypeScript. The app entry point is
+`lib/app.ts`, which creates the `App` and two stacks: `JbaltzStaticStack`
+(`lib/stacks/static-stack.ts`) and `JBRedirectStack`
+(`lib/stacks/redirect-stack.ts`). Reusable constructs are in `lib/constructs/`.
+`cdk.json` tells the CDK Toolkit how to run the app
+(`npx tsc && npx tsx lib/app.ts`).
+
+Both stacks are live in production. Treat the deployed setup as the baseline:
+keep `npx cdk diff` clean unless the user asked for an infrastructure change, and
+do not rename construct IDs (that replaces live resources). Site content in
+`site/` is deployed with `aws s3 sync` plus a CloudFront invalidation, not
+through CDK (see README.md).
 
 ## Read the construct library docs before writing code
 
@@ -30,9 +39,11 @@ read a whole README into context or re-read a section you have already read.
 
 - `npm run build` — type-check the project.
 - `npm run test` — run the jest unit tests.
-- `npx cdk synth` — synthesize the CloudFormation template.
-- `npx cdk diff` — compare against the deployed stack.
-- `npx cdk deploy` changes a real AWS account. Ask the user first.
+- `npx cdk synth` — synthesize the CloudFormation templates (needs `.env`).
+- `npx cdk diff` — compare both stacks against production. It is read-only;
+  `diff` takes no `--all` flag.
+- `npx cdk deploy <stack>` (or `--all`) changes the production AWS account. Ask
+  the user first.
 
 ## More resources
 
